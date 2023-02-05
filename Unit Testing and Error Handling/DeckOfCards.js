@@ -19,7 +19,7 @@ function printDeckOfCards(cards) {
                 currentFace == '9' || currentFace == '10' || currentFace.toUpperCase() == 'J' || currentFace.toUpperCase() == 'Q' || currentFace.toUpperCase() == 'K' || currentFace.toUpperCase() == 'A') {
                 card.face = currentFace.toUpperCase();
             } else {
-                console.log(`Invalid card: ${face}${suit}`);
+                throw new Error(`Invalid card: ${face}${suit}`);
             }
         }
         switch (suit) {
@@ -44,41 +44,36 @@ function printDeckOfCards(cards) {
                 card.suit = '\u2663';
                 break;
             default:
-                console.log(`Invalid card: ${face}${suit}`);
-                break;
+                throw new Error(`Invalid card: ${face}${suit}`);
+
         }
 
         return card;
 
     }
     let allCards = [];
-    let errorBoolean = false;
-    for (let currentInfo of cards) {
-        if (currentInfo.length == 3) {
-            let faceForTheObject = currentInfo[0] + currentInfo[1];
-            let suitForTheObject = currentInfo[2];
 
-            let currentCard = solve(faceForTheObject, suitForTheObject);
-            if (currentCard.face == undefined || currentCard.suit == undefined) {
-                errorBoolean = true;
+    try {
+        for (let currentInfo of cards) {
+            if (currentInfo.length == 3) {
+                let faceForTheObject = currentInfo[0] + currentInfo[1];
+                let suitForTheObject = currentInfo[2];
+                let currentCard = solve(faceForTheObject, suitForTheObject);
+                allCards.push(currentCard);
+
+            } else {
+                let faceForTheObject = currentInfo[0];
+                let suitForTheObject = currentInfo[1];
+                let currentCard = solve(faceForTheObject, suitForTheObject);
+                allCards.push(currentCard);
+
             }
-            allCards.push(currentCard);
-
-        } else {
-            let faceForTheObject = currentInfo[0];
-            let suitForTheObject = currentInfo[1];
-            let currentCard = solve(faceForTheObject, suitForTheObject);
-            if (currentCard.face == undefined || currentCard.suit == undefined) {
-                errorBoolean = true;
-            }
-            allCards.push(currentCard);
-
         }
-    }
-    if (errorBoolean == false) {
         console.log(allCards.join(' '));
+
+    } catch (error) {
+        console.log(error.message);
+
     }
-
-
 }
 printDeckOfCards(['5S', '3D', 'QD', '2C']);
