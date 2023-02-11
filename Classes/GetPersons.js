@@ -1,13 +1,13 @@
 function getPersons() {
     class Person {
-        constructor(firstName, secondName, age, email) {
-            this.firstName = firstName !== undefined ? firstName : '';
-            this.secondName = secondName !== undefined ? secondName : '';
-            this.age = age !== undefined ? age : '';
-            this.email = email !== undefined ? email : '';
+        constructor(firstName, lastName, age, email) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+            this.email = email;
         }
         toString() {
-            return `${this.firstName} ${this.secondName} (age: ${this.age}, email: ${this.email})`;
+            return `${this.firstName} ${this.lastName} (age: ${this.age}, email: ${this.email})`;
         }
     }
     let arrayOfPersons = [];
