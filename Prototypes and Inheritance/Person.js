@@ -2,7 +2,7 @@ class Person {
     constructor(firstName, lastName) {
         this._firstName = firstName;
         this._lastName = lastName;
-        this._fullName = this.firstName + ' ' + this.lastName;
+        this._fullName = this._firstName + ' ' + this._firstName;
     }
     get firstName() {
         return this._firstName;
